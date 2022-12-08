@@ -50,6 +50,7 @@ dependencies:
   image_cropper: ^3.0.1
   image_downloader: ^0.31.0
   pin_code_fields: ^7.4.0
+  firebase_core_platform_interface: ^4.5.1
 
 dev_dependencies:
   flutter_test:
