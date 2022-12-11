@@ -5,6 +5,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../logic/controllers/auth_controller.dart';
+import '../../logic/controllers/responsiveUiController.dart';
 import '../../utils/text_utils.dart';
 import '../../utils/theme.dart';
 import '../widgets/auth/auth_button.dart';
@@ -12,6 +13,7 @@ import '../widgets/auth/auth_button.dart';
 class OTPScreen extends StatelessWidget {
   String phoneNumber;
   OTPScreen({super.key, required this.phoneNumber});
+  final responsiveController = Get.find<ResponsiveUiController>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,13 @@ class OTPScreen extends StatelessWidget {
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: ListView(
+          child: GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              crossAxisCount:
+                  responsiveController.responsiveAttributes.crossAxisCount,
+            ),
             children: <Widget>[
               SizedBox(height: 4.1.h),
               SizedBox(height: 0.9.h),

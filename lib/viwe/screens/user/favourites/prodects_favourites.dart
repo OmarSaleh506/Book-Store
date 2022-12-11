@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../logic/controllers/prodect_controller.dart';
+import '../../../../logic/controllers/responsiveUiController.dart';
 import '../../../widgets/product/admin/stock/empty_screen.dart';
 
 class prodectsFavourites extends StatelessWidget {
   prodectsFavourites({super.key});
   final controller = Get.put(variable());
+  final responsiveController = Get.put(ResponsiveUiController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +24,7 @@ class prodectsFavourites extends StatelessWidget {
         centerTitle: true,
       ),
       body: controller.favoritesList.isNotEmpty
-          ? ListView.builder(
+          ? GridView.builder(
               itemCount: controller.favoritesList.length,
               itemBuilder: ((context, index) {
                 return Container(
@@ -112,6 +115,12 @@ class prodectsFavourites extends StatelessWidget {
                   ),
                 );
               }),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                crossAxisCount:
+                    responsiveController.responsiveAttributes.crossAxisCount,
+              ),
             )
           : EmptyScreen(),
     );

@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../logic/controllers/responsiveUiController.dart';
 
 class SideBarMenu extends StatelessWidget {
-  const SideBarMenu({super.key});
+  SideBarMenu({super.key});
+  final responsiveController = Get.put(ResponsiveUiController());
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: GridView(
         padding: EdgeInsets.zero,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+          crossAxisCount:
+              responsiveController.responsiveAttributes.crossAxisCount,
+        ),
         children: [
           SizedBox(
             height: 20,

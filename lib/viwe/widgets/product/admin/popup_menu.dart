@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import '../../../../Model/menu_items.dart';
 import '../../../../Model/model_menu_item.dart';
 import '../../../../logic/controllers/prodect_controller.dart';
@@ -42,8 +43,8 @@ class PopupMenu extends StatelessWidget {
   PopupMenuItem<MenuItemPoup> buildItem(MenuItemPoup item) => PopupMenuItem(
         value: item,
         child: SizedBox(
-          width: 147,
-          height: 64,
+          width: 20.w,
+          height: 8.h,
           child: Row(
             children: [
               Icon(item.icon),

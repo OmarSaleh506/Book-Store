@@ -3,16 +3,16 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../logic/controllers/auth_controller.dart';
+import '../../../logic/controllers/responsiveUiController.dart';
 import '../../../utils/text_utils.dart';
 import '../../widgets/settings/change_password_widget.dart';
 import '../../widgets/settings/logout_widget.dart';
 import '../../widgets/settings/notification_widget.dart';
 
-
-
 class SettingScreen extends StatelessWidget {
   SettingScreen({Key? key}) : super(key: key);
   final controller = Get.put(AuthController());
+  final responsiveController = Get.put(ResponsiveUiController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,14 @@ class SettingScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: ListView(
+        body: GridView(
           padding: const EdgeInsets.all(24),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            crossAxisCount:
+                responsiveController.responsiveAttributes.crossAxisCount,
+          ),
           children: [
             SizedBox(
               height: 3.5.h,

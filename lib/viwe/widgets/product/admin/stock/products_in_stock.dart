@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import '../../../../../logic/controllers/prodect_controller.dart';
+import '../../../../../logic/controllers/responsiveUiController.dart';
 import '../popup_menu.dart';
 
 class ProuctsInStock extends StatelessWidget {
   List<dynamic> products;
   ProuctsInStock({super.key, required this.products});
   final controller = Get.find<variable>();
+  final responsiveController = Get.put(ResponsiveUiController());
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<variable>(
-      builder: (_) => ListView.builder(
+      builder: (_) => GridView.builder(
         itemCount: products.length,
         itemBuilder: ((context, index) {
           return Container(
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 5),
-            height: 138,
-            width: 393,
+            margin: EdgeInsets.only(left: 2.w, right: 2.w, top: 1.h),
             decoration: BoxDecoration(
               color: Color.fromRGBO(255, 255, 255, 1),
               borderRadius: BorderRadius.circular(20),
@@ -24,9 +26,9 @@ class ProuctsInStock extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: 106,
-                  width: 96,
-                  margin: EdgeInsets.only(left: 15),
+                  height: 20.h,
+                  // width: 6.w,
+                  margin: EdgeInsets.only(left: 0.w),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(4),
@@ -37,7 +39,7 @@ class ProuctsInStock extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 1.w,
                 ),
                 Expanded(
                   child: Column(
@@ -51,7 +53,8 @@ class ProuctsInStock extends StatelessWidget {
                               "${products[index].productNumber}",
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
-                                fontSize: 12,
+                                fontSize: responsiveController
+                                    .responsiveAttributes.headline3,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -69,23 +72,25 @@ class ProuctsInStock extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 3,
+                        height: 1.h,
                       ),
                       Text(
                         "${products[index].productName}",
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: responsiveController
+                              .responsiveAttributes.headline3,
                           fontWeight: FontWeight.w300,
                           color: Color.fromRGBO(0, 0, 0, 1),
                         ),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 2.h,
                       ),
                       Text(
                         "${products[index].category}",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: responsiveController
+                              .responsiveAttributes.headline3,
                           fontWeight: FontWeight.w500,
                           color: Color.fromRGBO(0, 0, 0, 1),
                         ),
@@ -96,18 +101,20 @@ class ProuctsInStock extends StatelessWidget {
                       Text(
                         "${products[index].quantity}",
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: responsiveController
+                                .responsiveAttributes.headline3,
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(0, 0, 0, 1)),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 2.h,
                       ),
                       Row(
                         children: [
                           Text("\$${products[index].price}",
                               style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: responsiveController
+                                      .responsiveAttributes.headline3,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromRGBO(0, 0, 0, 1))),
                           Spacer(),
@@ -128,6 +135,13 @@ class ProuctsInStock extends StatelessWidget {
             ),
           );
         }),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 1,
+          mainAxisSpacing: 1,
+          childAspectRatio: 1,
+          crossAxisCount:
+              responsiveController.responsiveAttributes.crossAxisCount,
+        ),
       ),
     );
   }
